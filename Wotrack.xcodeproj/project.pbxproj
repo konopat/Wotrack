@@ -8,21 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		6F45C52F27BE658800791406 /* WotrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C52E27BE658800791406 /* WotrackApp.swift */; };
-		6F45C53127BE658800791406 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C53027BE658800791406 /* ContentView.swift */; };
+		6F45C53127BE658800791406 /* StartNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C53027BE658800791406 /* StartNavigationView.swift */; };
 		6F45C53327BE658A00791406 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F45C53227BE658A00791406 /* Assets.xcassets */; };
 		6F45C53627BE658A00791406 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F45C53527BE658A00791406 /* Preview Assets.xcassets */; };
 		6F45C53827BE658A00791406 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C53727BE658A00791406 /* Persistence.swift */; };
 		6F45C53B27BE658A00791406 /* Wotrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C53927BE658A00791406 /* Wotrack.xcdatamodeld */; };
+		6F45C54227BE665000791406 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6F45C54127BE665000791406 /* .gitignore */; };
+		6F45C54727BE676100791406 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C54627BE676100791406 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6F45C52B27BE658800791406 /* Wotrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wotrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F45C52E27BE658800791406 /* WotrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WotrackApp.swift; sourceTree = "<group>"; };
-		6F45C53027BE658800791406 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6F45C53027BE658800791406 /* StartNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNavigationView.swift; sourceTree = "<group>"; };
 		6F45C53227BE658A00791406 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F45C53527BE658A00791406 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F45C53727BE658A00791406 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		6F45C53A27BE658A00791406 /* Wotrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wotrack.xcdatamodel; sourceTree = "<group>"; };
+		6F45C54127BE665000791406 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../../../Desktop/.gitignore; sourceTree = "<group>"; };
+		6F45C54627BE676100791406 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +60,12 @@
 			isa = PBXGroup;
 			children = (
 				6F45C52E27BE658800791406 /* WotrackApp.swift */,
-				6F45C53027BE658800791406 /* ContentView.swift */,
+				6F45C54627BE676100791406 /* Constants.swift */,
+				6F45C54327BE666600791406 /* Model */,
+				6F45C54527BE66A300791406 /* Views */,
+				6F45C54427BE668900791406 /* ViewModel */,
 				6F45C53227BE658A00791406 /* Assets.xcassets */,
-				6F45C53727BE658A00791406 /* Persistence.swift */,
-				6F45C53927BE658A00791406 /* Wotrack.xcdatamodeld */,
+				6F45C54127BE665000791406 /* .gitignore */,
 				6F45C53427BE658A00791406 /* Preview Content */,
 			);
 			path = Wotrack;
@@ -71,6 +77,30 @@
 				6F45C53527BE658A00791406 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6F45C54327BE666600791406 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F45C53927BE658A00791406 /* Wotrack.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6F45C54427BE668900791406 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6F45C53727BE658A00791406 /* Persistence.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6F45C54527BE66A300791406 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6F45C53027BE658800791406 /* StartNavigationView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F45C53627BE658A00791406 /* Preview Assets.xcassets in Resources */,
+				6F45C54227BE665000791406 /* .gitignore in Resources */,
 				6F45C53327BE658A00791406 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,8 +174,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F45C54727BE676100791406 /* Constants.swift in Sources */,
 				6F45C53827BE658A00791406 /* Persistence.swift in Sources */,
-				6F45C53127BE658800791406 /* ContentView.swift in Sources */,
+				6F45C53127BE658800791406 /* StartNavigationView.swift in Sources */,
 				6F45C52F27BE658800791406 /* WotrackApp.swift in Sources */,
 				6F45C53B27BE658A00791406 /* Wotrack.xcdatamodeld in Sources */,
 			);
@@ -204,7 +236,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -259,7 +291,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -285,6 +317,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -294,7 +327,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -314,6 +347,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,7 +357,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

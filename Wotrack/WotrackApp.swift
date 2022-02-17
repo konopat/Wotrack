@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct WotrackApp: App {
-    let persistenceController = PersistenceController.shared
+    
+    let persistenceController = PersistenceController()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartNavigationView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
