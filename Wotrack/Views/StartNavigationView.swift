@@ -9,6 +9,8 @@ import SwiftUI
 import CoreData
 
 struct StartNavigationView: View {
+    
+    @ObservedObject var viewModel: ExercisesViewModel
 
     var body: some View {
         NavigationView {
@@ -21,15 +23,22 @@ struct StartNavigationView: View {
                         VStack {
                             // Header
                             HStack {
-                                Spacer()
-                                Text("Wotrack")
+                                Text("WoTrack")
                                     .foregroundColor(Color(K.Color.lightTextColor))
                                     .font(.title)
                                     .bold()
-                                Spacer()
+                            }
+                            .padding()
+                            
+                            // Content
+                            List {
+                                ForEach(viewModel.items) { item in
+                                    Text(item.title ?? "test")
+                                }
                             }
                         }
                     }
+                    .frame(width: geometry.size.width ,height: geometry.size.height)
                 }
                 .navigationTitle("Wotrack")
                 .navigationBarTitleDisplayMode(.inline)
@@ -39,11 +48,14 @@ struct StartNavigationView: View {
         .navigationViewStyle(StackNavigationViewStyle()) // Fix problem with constraint warning
         
     }
+    private func loadData() {
+        viewModel.loadData()
+    }
 }
 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        StartNavigationView()
+        StartNavigationView(viewModel: ExercisesViewModel())
     }
 }

@@ -14,10 +14,25 @@ struct K {
         static let lightTextColor = "lightTextColor"
     }
     
-    static let persistentContainerName = "Wotrack"
-    static let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "E, dd MMM yyyy"
-        return formatter
-    }()
+    struct CoreData {
+        static let persistentContainerName = "Wotrack"
+        static let parentEntityName = "Exercise"
+        static let basicSortingKey = "order"
+        static let fallbackSortingKey = "timestamp"
+        
+        static let defaultItems = [
+            "Squats",
+            "Push-ups",
+            "Pull-ups",
+            "Sit-ups",
+        ]
+    }
+    
+    struct Tools {
+        static let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "E, dd MMM yyyy"
+            return formatter
+        }()
+    }
 }

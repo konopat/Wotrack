@@ -14,7 +14,7 @@ struct WotrackApp: App {
 
     var body: some Scene {
         WindowGroup {
-            StartNavigationView()
+            StartNavigationView(viewModel: ExercisesViewModel())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
