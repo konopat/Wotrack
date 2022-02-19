@@ -13,27 +13,7 @@ class ExercisesViewModel: ObservableObject {
     typealias EntityModel = Exercise
     private let persistenceController = PersistenceController()
     @Published var items: [EntityModel] = []
-    
-//    private let defaults = UserDefaults.standard
-//    private var isFirstRun: Bool
-    
-//    // DOESNT WORK
-//    func loadDefaultData() {
-//        isFirstRun = true
-//        defaults.set(isFirstRun, forKey: "isFirstRun")
-//    }
-//    init() {
-//        // Default data
-//        for defaultItem in K.CoreData.defaultItems {
-//            let newItem = EntityModel(context: persistenceController.container.viewContext)
-//            newItem.title = defaultItem
-//            newItem.id = UUID()
-//            newItem.order = 0
-//            newItem.timestamp = Date()
-//
-//            items.append(newItem)
-//        }
-//    }
+
     
     // MARK: - Add data
         func addNewItem(with title: String) {

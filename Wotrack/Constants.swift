@@ -11,6 +11,8 @@ struct K {
     
     struct Color {
         static let backgroundColor = "backgroundColor"
+        static let cardBackgroundColor = "cardBackgroundColor"
+        static let textColor = "textColor"
         static let lightTextColor = "lightTextColor"
     }
     
@@ -34,5 +36,14 @@ struct K {
             formatter.dateFormat = "E, dd MMM yyyy"
             return formatter
         }()
+    }
+    
+    struct Icons {
+        struct Squat {
+            static let icon = "squat"
+            static let iconTitle = "squat icons"
+            static let iconUrl = "https://www.flaticon.com/free-icons/squat"
+            static let iconText = "Squat icons created by ultimatearm - Flaticon"
+        }
     }
 }
