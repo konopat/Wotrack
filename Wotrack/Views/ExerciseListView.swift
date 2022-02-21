@@ -16,10 +16,19 @@ struct ExerciseListView: View {
         LazyVGrid(columns: [GridItem(), GridItem()], spacing: 10) {
             ForEach(viewModel.items) { item in
                 ExerciseCardView(item: item, geometry: geometry)
+                    .onDrag {
+                        return NSItemProvider()
+                    }
             }
+            .onMove(perform: move)
+            
             AddNewExerciseButtonView(viewModel: viewModel)
         }
         .padding(.horizontal)
+    }
+    
+    private func move(the source: IndexSet, to destination: Int) {
+        viewModel.move(from: source, to: destination)
     }
 }
 
