@@ -14,6 +14,7 @@ struct K {
     }
     
     struct Color {
+        static let accentColor = "accentColor"
         static let backgroundColor = "backgroundColor"
         static let cardBackgroundColor = "cardBackgroundColor"
         static let textColor = "textColor"
@@ -37,6 +38,12 @@ struct K {
     
     struct Icons {
         struct Default {
+            static let defaultIconSet = [
+                "squat",
+                "pullups",
+                "pushups",
+                "situps",
+            ]
             static let icon = "default"
             static let iconTitle = "exercise icons"
             static let iconUrl = "https://www.flaticon.com/free-icons/exercise"

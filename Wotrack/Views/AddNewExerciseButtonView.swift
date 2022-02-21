@@ -10,10 +10,11 @@ import SwiftUI
 struct AddNewExerciseButtonView: View {
     
     @ObservedObject var viewModel: ExercisesViewModel
+    @State private var showSheet = false
     
     var body: some View {
-        NavigationLink {
-            AddNewExerciseEditorView(viewModel: viewModel)
+        Button {
+            showSheet = true
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
@@ -26,6 +27,9 @@ struct AddNewExerciseButtonView: View {
                     .foregroundColor(Color(K.Color.textColor))
             }
             .aspectRatio(4/5, contentMode: .fit)
+        }
+        .sheet(isPresented: $showSheet) {
+            AddNewExerciseEditorView(viewModel: viewModel, isPresented: $showSheet)
         }
     }
 }
