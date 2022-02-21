@@ -11,12 +11,6 @@ import CoreData
 struct StartNavigationView: View {
     
     @ObservedObject var viewModel: ExercisesViewModel
-    let testitems = [
-        "Squats",
-        "Push-ups",
-        "Pull-ups",
-        "Sit-ups",
-    ]
 
     var body: some View {
         NavigationView {
@@ -28,7 +22,7 @@ struct StartNavigationView: View {
                         VStack {
                             // Header
                             HStack {
-                                Text("WoTrack")
+                                Text(K.Brand.logoTitle)
                                     .foregroundColor(Color(K.Color.lightTextColor))
                                     .font(.title)
                                     .bold()
@@ -36,39 +30,7 @@ struct StartNavigationView: View {
                             .padding()
                             // Content
                             ScrollView {
-                                LazyVGrid(columns: [GridItem(), GridItem()], spacing: 10) {
-                                    ForEach(testitems, id: \.self) { item in
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .foregroundColor(Color(K.Color.cardBackgroundColor))
-                                            VStack(spacing: 5) {
-                                                Image(K.Icons.Squat.icon)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: geometry.size.width / 4)
-                                                Text(item)
-                                                    .bold()
-                                                    .foregroundColor(Color(K.Color.textColor))
-                                                    
-                                                VStack(spacing: 2) {
-                                                    Text("150 / 150 / 33150")
-                                                }
-                                                .font(.caption2)
-                                            }
-                                            .padding()
-                                        }
-                                        .aspectRatio(4/5, contentMode: .fit)
-                                            
-//                                        if let itemTitle = item.title {
-//                                            VStack {
-//                                                Text(itemTitle)
-//                                            }
-//                                            .aspectRatio(3/2, contentMode: .fit)
-//                                        }
-                                    }
-                                    AddWorkoutButtonView()
-                                }
-                                .padding(.horizontal)
+                                ExerciseListView(viewModel: viewModel, geometry: geometry)
                             }
                             .onAppear(perform: loadData)
                         }
@@ -86,21 +48,7 @@ struct StartNavigationView: View {
     }
 }
 
-struct AddWorkoutButtonView: View {
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color(K.Color.cardBackgroundColor))
-            Image(systemName: "plus")
-                .resizable()
-                .scaledToFit()
-                .padding()
-                .frame(width: 60, height: 60)
-                .foregroundColor(Color(K.Color.textColor))
-        }
-        .aspectRatio(4/5, contentMode: .fit)
-    }
-}
+// MARK: - Preview
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

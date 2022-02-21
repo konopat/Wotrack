@@ -16,7 +16,7 @@ class ExercisesViewModel: ObservableObject {
 
     
     // MARK: - Add data
-        func addNewItem(with title: String) {
+    func addNewItem(with title: String, and icon: String) {
             
             // Initializing the creation of a new entity
             let newItem = EntityModel(context: persistenceController.container.viewContext)
@@ -24,6 +24,7 @@ class ExercisesViewModel: ObservableObject {
             // Then assign values to all properties
             newItem.id = UUID()
             newItem.title = title
+            newItem.icon = icon
             newItem.timestamp = Date()
             newItem.order = 0 // By default is zero unless an user wants to change the sort.
             
@@ -102,4 +103,14 @@ class ExercisesViewModel: ObservableObject {
         }
     
     
+}
+
+public extension NSManagedObject {
+
+    convenience init(context: NSManagedObjectContext) {
+        let name = String(describing: type(of: self))
+        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
+        self.init(entity: entity, insertInto: context)
+    }
+
 }
