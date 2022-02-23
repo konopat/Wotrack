@@ -87,22 +87,13 @@ class ExercisesViewModel: ObservableObject {
         }
     
     // MARK: - Reorder data items
-        func move(from source: IndexSet, to destination: Int) {
-            // Just like in deleteItems func we have the IndexSet contains all passed items.
-            // And destination with number of row in the List.
-             
-            // Change the order of the items in the array is really simple
-            items.move(fromOffsets: source, toOffset: destination )
-
-            // Then, to save the new order in CoreData we can by update a special attribute for all of Items
-            // We simply take the number of all entries (remember that the first element is numbered zero, so we subtract one from the total) and assign the value in order, subtracting one each time until we reach position zero.
+        func move(from: IndexSet, to: Int) {
+            items.move(fromOffsets: from, toOffset: to)
             for reverseIndex in stride( from: items.count - 1, through: 0, by: -1 ) {
                 items[ reverseIndex ].order = Int16( reverseIndex )
             }
             saveData()
         }
-    
-    
 }
 
 public extension NSManagedObject {

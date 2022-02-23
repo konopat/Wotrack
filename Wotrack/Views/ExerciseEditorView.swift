@@ -29,7 +29,6 @@ struct ExerciseEditorView: View {
     private func saveData() {
         item.title = textFieldValue
         viewModel.saveData()
-        print(viewModel.items)
     }
 }
 

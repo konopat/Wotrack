@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers // Need for drag and drop reordering in LazyVGrid
 
 struct ExerciseListView: View {
     
@@ -13,22 +14,27 @@ struct ExerciseListView: View {
     let geometry: GeometryProxy
     
     var body: some View {
-        LazyVGrid(columns: [GridItem(), GridItem()], spacing: 10) {
-            ForEach(viewModel.items) { item in
-                ExerciseCardView(item: item, geometry: geometry)
-                    .onDrag {
-                        return NSItemProvider()
-                    }
+        LazyVGrid(columns: K.Grid.columns, spacing: K.Grid.spacing) {
+            // CustomViewsExtenssion with drag and drop reordering feauter
+            ReorderableForEach(items: viewModel.items) { item in
+                NavigationLink {
+                    ExerciseEditorView(viewModel: viewModel, item: item)
+                } label: {
+                    ExerciseCardView(item: item, geometry: geometry)
+                }
+
+            } moveAction: { from, to in
+                move(fromOffsets: from, toOffset: to)
             }
-            .onMove(perform: move)
-            
             AddNewExerciseButtonView(viewModel: viewModel)
         }
         .padding(.horizontal)
     }
     
-    private func move(the source: IndexSet, to destination: Int) {
-        viewModel.move(from: source, to: destination)
+    // MARK: - Functions
+    
+    private func move(fromOffsets: IndexSet, toOffset: Int) {
+        viewModel.move(from: fromOffsets, to: toOffset)
     }
 }
 

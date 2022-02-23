@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct K {
     
@@ -19,6 +20,11 @@ struct K {
         static let cardBackgroundColor = "cardBackgroundColor"
         static let textColor = "textColor"
         static let lightTextColor = "lightTextColor"
+    }
+    
+    struct Grid {
+        static let columns = [GridItem(), GridItem()]
+        static let spacing: CGFloat = 10
     }
     
     struct CoreData {
