@@ -1,39 +1,38 @@
 //
-//  ExercisesViewModel.swift
+//  IterancesViewModel.swift
 //  Wotrack
 //
-//  Created by Роман Предеин on 17.02.2022.
+//  Created by Роман Предеин on 25.02.2022.
 //
 
-import SwiftUI
+import Foundation
 import CoreData
 
-class ExercisesViewModel: ObservableObject {
+class IterancesViewModel: ObservableObject {
     
-    typealias EntityModel = Exercise
+    typealias EntityModel = Iterance
     private let persistenceController = PersistenceController.shared
     @Published var items: [EntityModel] = []
 
     
     // MARK: - Add data
-    func addNewItem(with title: String, and icon: String) {
+    func addNewItem(number: Int, to exercise: Exercise) {
             
             // Initializing the creation of a new entity
             let newItem = EntityModel(context: persistenceController.container.viewContext)
             
             // Then assign values to all properties
             newItem.id = UUID()
-            newItem.title = title
-            newItem.icon = icon
             newItem.timestamp = Date()
-            newItem.order = 0 // By default is zero unless an user wants to change the sort.
+            newItem.number = Int16(number)
+            newItem.parentExercise = exercise
             
             // And start saving
-            saveData()
+            saveData(for: exercise)
         }
     
     // MARK: - Remove data
-        func deleteItems(by offsets: IndexSet) {
+    func deleteItems(by offsets: IndexSet, in exercise: Exercise) {
             // The IndexSet contains all passed items
             // Most of the time it's just one item, but theoretically, we can work with bulk items.
             
@@ -41,11 +40,11 @@ class ExercisesViewModel: ObservableObject {
             offsets.map { items[$0] }.forEach(persistenceController.container.viewContext.delete)
             
             // And start saving certainly
-            saveData()
+            saveData(for: exercise)
         }
     
     // MARK: - Saving data
-        func saveData() {
+    func saveData(for exercise: Exercise) {
             
             // Only if changes are detected
             if persistenceController.container.viewContext.hasChanges {
@@ -54,7 +53,7 @@ class ExercisesViewModel: ObservableObject {
                     try persistenceController.container.viewContext.save()
                     
                     // And load it again to update the published variable to reflect this change
-                    loadData()
+                    loadData(from: exercise)
                 } catch let error {
                     // If it doesn't work
                     print("Error: \(error)")
@@ -63,19 +62,23 @@ class ExercisesViewModel: ObservableObject {
         }
     
     // MARK: - Loading data
-        func loadData() {
+    func loadData(from exercise: Exercise) {
             
+            let currentExercise = exercise
+        
+            let predicate = NSPredicate(format: "parentExercise.title MATCHES %@", currentExercise.title!)
+        
             // Request objects that match our model
             let request = NSFetchRequest<EntityModel>(entityName: K.CoreData.parentEntityName)
-            
+            request.predicate = predicate
+        
             // SORT RULES:
             // Priority or basic sort mean sort by a special attribute in CoreData Item.
             // That allow us to save changes in order by user.
-            let sort = NSSortDescriptor(key: K.CoreData.basicSortingKey, ascending: true)
-            let fallbackSort = NSSortDescriptor(key: K.CoreData.fallbackSortingKey, ascending: false)
+            let sort = NSSortDescriptor(key: K.CoreData.fallbackSortingKey, ascending: false)
             
             // Applying sorting
-            request.sortDescriptors = [sort, fallbackSort]
+            request.sortDescriptors = [sort]
             
             do {
                 // Try to load the result into the monitored array
@@ -85,23 +88,5 @@ class ExercisesViewModel: ObservableObject {
                 print("Error getting data. \(error.localizedDescription)")
             }
         }
-    
-    // MARK: - Reorder data items
-        func move(from: IndexSet, to: Int) {
-            items.move(fromOffsets: from, toOffset: to)
-            for reverseIndex in stride( from: items.count - 1, through: 0, by: -1 ) {
-                items[ reverseIndex ].order = Int16( reverseIndex )
-            }
-            saveData()
-        }
-}
-
-public extension NSManagedObject {
-
-    convenience init(context: NSManagedObjectContext) {
-        let name = String(describing: type(of: self))
-        let entity = NSEntityDescription.entity(forEntityName: name, in: context)!
-        self.init(entity: entity, insertInto: context)
-    }
 
 }

@@ -18,7 +18,7 @@ struct ExerciseListView: View {
             // CustomViewsExtenssion with drag and drop reordering feauter
             ReorderableForEach(items: viewModel.items) { item in
                 NavigationLink {
-                    ExerciseEditorView(viewModel: viewModel, item: item)
+                    IteranceListView(viewModel: IterancesViewModel(), exercise: item)
                 } label: {
                     ExerciseCardView(item: item, geometry: geometry)
                 }

@@ -6,8 +6,16 @@
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="iterances" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Iterance" inverseName="parentExercise" inverseEntity="Iterance"/>
+    </entity>
+    <entity name="Iterance" representedClassName="Iterance" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="parentExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="iterances" inverseEntity="Exercise"/>
     </entity>
     <elements>
-        <element name="Exercise" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Exercise" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Iterance" positionX="100.756103515625" positionY="-17.209716796875" width="128" height="103"/>
     </elements>
 </model>

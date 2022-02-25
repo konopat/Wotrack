@@ -30,6 +30,7 @@ struct K {
     struct CoreData {
         static let persistentContainerName = "Wotrack"
         static let parentEntityName = "Exercise"
+        static let childeEntityName = "Iterance"
         static let basicSortingKey = "order"
         static let fallbackSortingKey = "timestamp"
     }

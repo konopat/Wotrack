@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct WotrackApp: App {
     
-    let persistenceController = PersistenceController()
+    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
