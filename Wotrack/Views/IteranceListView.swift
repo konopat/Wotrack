@@ -17,7 +17,23 @@ struct IteranceListView: View {
         GeometryReader { geometry in // For dynamic size calculations.
             ScrollView { // If you want to place something other than a List on this view.
                 VStack {
+                    HStack {
+                        if let exerciseTitle = exercise.title {
+                            Text(exerciseTitle)
+                                .font(.largeTitle .bold())
+                            Spacer()
+                            VStack(alignment: .trailing) {
+                                Text("Today: \(exercise.toDayIterances)")
+                                Text("Total: \(exercise.sumOfIterances)")
+                            }
+                            .font(.caption)
+                        }
+                    }
+                    .padding(.top)
+                    .padding(.horizontal)
+                    
                     AddNewItemFieldView(viewModel: viewModel, exercise: exercise)
+                    
                     ListOfItemsView(viewModel: viewModel, geometry: geometry, exercise: exercise)
                 }
                 .background(Color(UIColor.systemGray6)) // Only for iOS 15 and above
@@ -56,7 +72,6 @@ struct AddNewItemFieldView: View {
             .padding()
             .background(.white) // Only for iOS 15 and above
         }
-        .padding(.top)
         .padding(.bottom, 5)
         .padding(.horizontal)
     }
@@ -75,43 +90,52 @@ struct ListOfItemsView: View {
     @State var viewModel: ExercisesViewModel
     let geometry: GeometryProxy
     let exercise: Exercise
+    let calendar = Calendar.current
     
     var body: some View {
-        List {
-            ForEach(viewModel.iterancesArray) { item in
-                HStack {
-                    NavigationLink {
-                        //
-                    } label: {
-                        if let iteranceItem = item {
-                            if let number = iteranceItem.number, let exercise = iteranceItem.parentExercise {
-                                HStack {
-                                    Text("\(number)")
-                                        .font(.title)
-                                        .bold()
-                                    Spacer()
-                                    if let exerciseName = exercise.title {
-                                        Text("\(exerciseName)")
+        VStack {
+            List {
+                ForEach(viewModel.iterancesArray) { item in
+                    HStack {
+                        NavigationLink {
+                            IteranceEditorView(viewModel: viewModel, iterance: item)
+                        } label: {
+                            if let iteranceItem = item {
+                                if let number = iteranceItem.number {
+                                    HStack {
+                                        Text("\(number)")
+                                            .font(.title)
+                                            .bold()
+                                        Spacer()
+                                        if let timestamp = item.timestamp {
+                                            if calendar.isDateInToday(timestamp) {
+                                                Text("Today")
+                                            } else {
+                                                Text("\(timestamp, format: Date.FormatStyle().year().month().day().hour().minute())")
+                                                    .font(.caption)
+                                            }
+                                            
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                    .onDrag {
+                        return NSItemProvider()
+                        // Combination with NSItemProvider() on drag gesture and .OnMove function
+                        // allows the ability to move tasks by simply grabbing the one you need
+                        // without activating the edit mode.
+                    }
                 }
-                .onDrag {
-                    return NSItemProvider()
-                    // Combination with NSItemProvider() on drag gesture and .OnMove function
-                    // allows the ability to move tasks by simply grabbing the one you need
-                    // without activating the edit mode.
-                }
-            }
-            .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteItems)
 
+            }
+            .listStyle(PlainListStyle()) // Removes defaults padding.
+            .frame(height: geometry.size.height) // Required for Scrollview to work properly.
+            .padding(.horizontal)
+            .onAppear(perform: loadItems)
         }
-        .listStyle(PlainListStyle()) // Removes defaults padding.
-        .frame(height: geometry.size.height) // Required for Scrollview to work properly.
-        .padding(.horizontal)
-        .onAppear(perform: loadItems)
     }
         
     

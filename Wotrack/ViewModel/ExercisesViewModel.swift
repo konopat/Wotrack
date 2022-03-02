@@ -62,7 +62,8 @@ class ExercisesViewModel: ObservableObject {
         newItem.icon = icon
         newItem.timestamp = Date()
         newItem.order = 0 // By default is zero unless an user wants to change the sort.
-        
+        newItem.sumOfIterances = 0
+        newItem.toDayIterances = 0
         
         // And start saving
         saveData()
@@ -124,6 +125,7 @@ class ExercisesViewModel: ObservableObject {
         
         if let exerciseIndex = exercisesArray.firstIndex(where: { $0.id == exercise.id  }) {
             newItem.parentExercise = exercisesArray[exerciseIndex]
+            exercisesArray[exerciseIndex].sumOfIterances += Int16(number)
         }
         
         // And start saving
@@ -151,6 +153,24 @@ class ExercisesViewModel: ObservableObject {
             do {
                 // Try to load the result into the monitored array
                 try iterancesArray = persistenceController.container.viewContext.fetch(request)
+                
+                var sumOfFetchedIterances: Int16 = 0
+                for iterance in iterancesArray {
+                    sumOfFetchedIterances += iterance.number
+                }
+                currentExercise.sumOfIterances = sumOfFetchedIterances
+                
+                // Computing today iterances
+                var sumOfToDayIterances: Int16 = 0
+                let calendar = Calendar.current
+                let todayIterances = iterancesArray.filter({calendar.isDateInToday($0.timestamp!)})
+                for iterance in todayIterances {
+                    sumOfToDayIterances += iterance.number
+                }
+                currentExercise.toDayIterances = sumOfToDayIterances
+                
+                saveData()
+                
             } catch {
                 // If it doesn't work
                 print("Error getting data. \(error.localizedDescription)")

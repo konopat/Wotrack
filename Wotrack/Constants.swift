@@ -44,6 +44,12 @@ struct K {
     }
     
     struct Icons {
+        struct Autors {
+            struct FlatIconWorkoutSet {
+                static let iconSetUrl = "https://www.flaticon.com/authors/ultimatearm"
+                static let iconSetText = "Icons made by Ultimatearm from www.flaticon.com"
+            }
+        }
         struct Default {
             static let defaultIconSet = [
                 "squat",

@@ -27,7 +27,8 @@ struct ExerciseCardView: View {
                         .foregroundColor(Color(K.Color.textColor))
                         
                     VStack(spacing: 2) {
-                        Text("150 / 150 / 33150")
+                        Text("Today: \(item.toDayIterances)")
+                        Text("Total: \(item.sumOfIterances)")
                     }
                     .font(.caption2)
                 }
