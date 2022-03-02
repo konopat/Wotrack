@@ -83,7 +83,7 @@ struct AddNewExerciseEditorView: View {
     
     private func addNewItem(title: String, icon: String) {
         if textFieldValue != "" {
-            viewModel.addNewItem(with: title, and: icon)
+            viewModel.addNewExercise(with: title, and: icon)
             isPresented = false
         }
     }

@@ -10,7 +10,7 @@ import CoreData
 
 struct IteranceListView: View {
     
-    @ObservedObject var viewModel: IterancesViewModel
+    @ObservedObject var viewModel: ExercisesViewModel
     let exercise: Exercise
     
     var body: some View {
@@ -30,7 +30,7 @@ struct IteranceListView: View {
 
 struct AddNewItemFieldView: View {
     
-    @State var viewModel: IterancesViewModel
+    @State var viewModel: ExercisesViewModel
     @State var numberOfIterance: Int?
     let exercise: Exercise
     
@@ -63,7 +63,7 @@ struct AddNewItemFieldView: View {
     
     private func addNewTask() {
         if let currentNumber = numberOfIterance {
-            viewModel.addNewItem(number: currentNumber, to: exercise)
+            viewModel.addNewIterance(number: currentNumber, to: exercise)
             numberOfIterance = nil
         }
     }
@@ -72,24 +72,28 @@ struct AddNewItemFieldView: View {
 
 struct ListOfItemsView: View {
     
-    @State var viewModel: IterancesViewModel
+    @State var viewModel: ExercisesViewModel
     let geometry: GeometryProxy
     let exercise: Exercise
     
     var body: some View {
         List {
-            ForEach(viewModel.items) { item in
+            ForEach(viewModel.iterancesArray) { item in
                 HStack {
                     NavigationLink {
                         //
                     } label: {
-                        if let number = item.number, let timestamp = item.timestamp {
-                            HStack {
-                                Text("\(number)")
-                                    .font(.title)
-                                    .bold()
-                                Spacer()
-                                Text("\(timestamp)")
+                        if let iteranceItem = item {
+                            if let number = iteranceItem.number, let exercise = iteranceItem.parentExercise {
+                                HStack {
+                                    Text("\(number)")
+                                        .font(.title)
+                                        .bold()
+                                    Spacer()
+                                    if let exerciseName = exercise.title {
+                                        Text("\(exerciseName)")
+                                    }
+                                }
                             }
                         }
                     }
@@ -112,11 +116,12 @@ struct ListOfItemsView: View {
         
     
     private func loadItems() {
-        viewModel.loadData(from: exercise)
+        viewModel.loadIterances(by: exercise)
     }
     
     private func deleteItems(offsets: IndexSet) {
-        viewModel.deleteItems(by: offsets, in: exercise)
+        viewModel.deleteIterance(by: offsets)
+        viewModel.loadIterances(by: exercise)
     }
 }
 

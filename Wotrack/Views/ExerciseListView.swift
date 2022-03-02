@@ -16,9 +16,9 @@ struct ExerciseListView: View {
     var body: some View {
         LazyVGrid(columns: K.Grid.columns, spacing: K.Grid.spacing) {
             // CustomViewsExtenssion with drag and drop reordering feauter
-            ReorderableForEach(items: viewModel.items) { item in
+            ReorderableForEach(items: viewModel.exercisesArray) { item in
                 NavigationLink {
-                    IteranceListView(viewModel: IterancesViewModel(), exercise: item)
+                    IteranceListView(viewModel: viewModel, exercise: item)
                 } label: {
                     ExerciseCardView(item: item, geometry: geometry)
                 }
@@ -34,7 +34,7 @@ struct ExerciseListView: View {
     // MARK: - Functions
     
     private func move(fromOffsets: IndexSet, toOffset: Int) {
-        viewModel.move(from: fromOffsets, to: toOffset)
+        viewModel.moveExercise(from: fromOffsets, to: toOffset)
     }
 }
 

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F01F9E327C8E62900F95BA8 /* IterancesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F01F9E227C8E62900F95BA8 /* IterancesViewModel.swift */; };
 		6F01F9E527C8EA4E00F95BA8 /* IteranceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F01F9E427C8EA4E00F95BA8 /* IteranceListView.swift */; };
 		6F45C52F27BE658800791406 /* WotrackApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C52E27BE658800791406 /* WotrackApp.swift */; };
 		6F45C53127BE658800791406 /* StartNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F45C53027BE658800791406 /* StartNavigationView.swift */; };
@@ -27,7 +26,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6F01F9E227C8E62900F95BA8 /* IterancesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IterancesViewModel.swift; sourceTree = "<group>"; };
 		6F01F9E427C8EA4E00F95BA8 /* IteranceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IteranceListView.swift; sourceTree = "<group>"; };
 		6F45C52B27BE658800791406 /* Wotrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wotrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F45C52E27BE658800791406 /* WotrackApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WotrackApp.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 			children = (
 				6F45C53727BE658A00791406 /* Persistence.swift */,
 				6FCB721327BE9639006A1930 /* ExercisesViewModel.swift */,
-				6F01F9E227C8E62900F95BA8 /* IterancesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -209,7 +206,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F01F9E327C8E62900F95BA8 /* IterancesViewModel.swift in Sources */,
 				6FCB721427BE9639006A1930 /* ExercisesViewModel.swift in Sources */,
 				6F45C54727BE676100791406 /* Constants.swift in Sources */,
 				6F5F320F27C5F99C005EE7FF /* ReorderableForEach.swift in Sources */,

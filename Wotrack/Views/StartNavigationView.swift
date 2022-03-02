@@ -44,7 +44,7 @@ struct StartNavigationView: View {
         
     }
     private func loadData() {
-        viewModel.loadData()
+        viewModel.loadExercises()
     }
 }
 
