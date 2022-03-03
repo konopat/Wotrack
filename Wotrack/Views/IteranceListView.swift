@@ -11,34 +11,39 @@ import CoreData
 struct IteranceListView: View {
     
     @ObservedObject var viewModel: ExercisesViewModel
-    let exercise: Exercise
+    let exercise: Exercise // Expect the exercise from the parent view
+    let geometry: GeometryProxy // Expect dynamic sizes from the parent view
     
     var body: some View {
-        GeometryReader { geometry in // For dynamic size calculations.
-            ScrollView { // If you want to place something other than a List on this view.
-                VStack {
-                    HStack {
-                        if let exerciseTitle = exercise.title {
-                            Text(exerciseTitle)
-                                .font(.largeTitle .bold())
-                            Spacer()
-                            VStack(alignment: .trailing) {
-                                Text("Today: \(exercise.toDayIterances)")
-                                Text("Total: \(exercise.sumOfIterances)")
+        ScrollView { // If you want to place something other than a List on this view.
+            VStack(spacing: K.Grid.spacing) {
+                HStack {
+                    if let exerciseTitle = exercise.title {
+                        Text(exerciseTitle)
+                            .font(.largeTitle .bold())
+                            .foregroundColor(Color(K.Color.lightTextColor))
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            Group {
+                                Text("\(K.Text.toDay[viewModel.language] ?? "Today"): \(exercise.toDayIterances)")
+                                Text("\(K.Text.total[viewModel.language] ?? "Total"): \(exercise.sumOfIterances)")
                             }
-                            .font(.caption)
+                            .foregroundColor(Color(K.Color.lightTextColor))
                         }
+                        .font(.caption)
                     }
-                    .padding(.top)
-                    .padding(.horizontal)
-                    
-                    AddNewItemFieldView(viewModel: viewModel, exercise: exercise)
-                    
-                    ListOfItemsView(viewModel: viewModel, geometry: geometry, exercise: exercise)
                 }
-                .background(Color(UIColor.systemGray6)) // Only for iOS 15 and above
+                .padding()
+                // Field
+                AddNewItemFieldView(viewModel: viewModel, exercise: exercise)
+                // Listing
+                ListOfItemsView(viewModel: viewModel, geometry: geometry, exercise: exercise)
             }
-        }
+            .background(
+                Color(K.Color.backgroundColor)
+                            .edgesIgnoringSafeArea(.all)
+            )
+        }        
     }
 }
 
@@ -59,20 +64,22 @@ struct AddNewItemFieldView: View {
     var body: some View {
         Group {
             HStack {
-                TextField("New iterance", value: $numberOfIterance, format: .number)
+                TextField(K.Text.newIterance[viewModel.language] ?? "New iterance", value: $numberOfIterance, format: .number)
+                    .foregroundColor(Color(K.Color.textColor))
                     .keyboardType(.decimalPad)
                     .focused($focusedField, equals: .textField)
+                    
                 Button {
                     focusedField = nil
                     addNewTask()
                 } label: {
-                    Text("Add")
+                    Text(K.Text.add[viewModel.language] ?? "Add")
+                        .foregroundColor(Color(K.Color.textColor))
                 }
             }
             .padding()
-            .background(.white) // Only for iOS 15 and above
+            .background(Color(K.Color.cardBackgroundColor)) // Only for iOS 15 and above
         }
-        .padding(.bottom, 5)
         .padding(.horizontal)
     }
     
@@ -106,21 +113,26 @@ struct ListOfItemsView: View {
                                         Text("\(number)")
                                             .font(.title)
                                             .bold()
+                                            .foregroundColor(Color(K.Color.textColor))
                                         Spacer()
                                         if let timestamp = item.timestamp {
                                             if calendar.isDateInToday(timestamp) {
-                                                Text("Today")
+                                                Text(K.Text.toDay[viewModel.language] ?? "Today")
+                                                    .foregroundColor(Color(K.Color.textColor))
                                             } else {
                                                 Text("\(timestamp, format: Date.FormatStyle().year().month().day().hour().minute())")
                                                     .font(.caption)
+                                                    .foregroundColor(Color(K.Color.textColor))
                                             }
                                             
                                         }
                                     }
+                                    .padding()
                                 }
                             }
                         }
                     }
+                    .listRowBackground(Color(K.Color.cardBackgroundColor))
                     .onDrag {
                         return NSItemProvider()
                         // Combination with NSItemProvider() on drag gesture and .OnMove function
@@ -132,8 +144,8 @@ struct ListOfItemsView: View {
 
             }
             .listStyle(PlainListStyle()) // Removes defaults padding.
-            .frame(height: geometry.size.height) // Required for Scrollview to work properly.
             .padding(.horizontal)
+            .frame(height: geometry.size.height) // Required for Scrollview to work properly.
             .onAppear(perform: loadItems)
         }
     }
@@ -148,12 +160,3 @@ struct ListOfItemsView: View {
         viewModel.loadIterances(by: exercise)
     }
 }
-
-// MARK: - Preview
-
-//
-//struct IteranceListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IteranceListView()
-//    }
-//}

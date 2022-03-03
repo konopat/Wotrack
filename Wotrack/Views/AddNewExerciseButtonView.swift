@@ -10,23 +10,23 @@ import SwiftUI
 struct AddNewExerciseButtonView: View {
     
     @ObservedObject var viewModel: ExercisesViewModel
-    @State private var showSheet = false
+    @State private var showSheet = false // Show or hide new exercise options
     
     var body: some View {
         Button {
             showSheet = true
         } label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 10)
+                K.Card.shape
                     .foregroundColor(Color(K.Color.cardBackgroundColor))
-                Image(systemName: "plus")
+                Image(systemName: K.Icons.SystemSet.plus)
                     .resizable()
                     .scaledToFit()
                     .padding()
-                    .frame(width: 60, height: 60)
+                    .frame(width: K.Card.iconWidth, height: K.Card.iconHeight)
                     .foregroundColor(Color(K.Color.textColor))
             }
-            .aspectRatio(4/5, contentMode: .fit)
+            .aspectRatio(K.Card.aspectRatio, contentMode: .fit)
         }
         .sheet(isPresented: $showSheet) {
             AddNewExerciseEditorView(viewModel: viewModel, isPresented: $showSheet)
@@ -34,6 +34,7 @@ struct AddNewExerciseButtonView: View {
     }
 }
 
+// MARK: - Preview
 struct AddNewExerciseButtonView_Previews: PreviewProvider {
     static var previews: some View {
         AddNewExerciseButtonView(viewModel: ExercisesViewModel())

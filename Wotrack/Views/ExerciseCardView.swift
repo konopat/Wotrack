@@ -9,32 +9,36 @@ import SwiftUI
 
 struct ExerciseCardView: View {
     
-    let item: Exercise
-    let geometry: GeometryProxy
+    @ObservedObject var viewModel: ExercisesViewModel
+    let exercise: Exercise // Expect the exercise from the parent view
+    let geometry: GeometryProxy // Expect dynamic sizes from the parent view
+    
     var body: some View {
-        
-        if let itemTitle = item.title {
+        if let itemTitle = exercise.title { // Only if exercise data is received
             ZStack {
-                RoundedRectangle(cornerRadius: 10)
+                // Background
+                K.Card.shape
                     .foregroundColor(Color(K.Color.cardBackgroundColor))
-                VStack(spacing: 5) {
-                    Image(item.icon ?? K.Icons.Default.icon)
+                // Content
+                VStack(spacing: K.Card.spacing) {
+                    Image(exercise.icon ?? K.Icons.Default.icon)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: geometry.size.width / 4)
+                        .frame(width: geometry.size.width / K.Card.iconRatio)
                     Text(itemTitle)
                         .bold()
                         .foregroundColor(Color(K.Color.textColor))
                         
-                    VStack(spacing: 2) {
-                        Text("Today: \(item.toDayIterances)")
-                        Text("Total: \(item.sumOfIterances)")
+                    VStack(spacing: K.Card.spacingCaption) {
+                        Text("\(K.Text.toDay[viewModel.language] ?? "Today"): \(exercise.toDayIterances)")
+                        Text("\(K.Text.total[viewModel.language] ?? "Total"): \(exercise.sumOfIterances)")
                     }
                     .font(.caption2)
+                    .foregroundColor(Color(K.Color.textColor))
                 }
                 .padding()
             }
-            .aspectRatio(4/5, contentMode: .fit)
+            .aspectRatio(K.Card.aspectRatio, contentMode: .fit)
         }
     }
 }

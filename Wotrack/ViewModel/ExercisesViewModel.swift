@@ -17,6 +17,7 @@ class ExercisesViewModel: ObservableObject {
     
     @Published var exercisesArray: [ExerciseEntity] = []
     @Published var iterancesArray: [IteranceEntity] = []
+    @Published var language = "Eng"
     
     init() {
         loadData()

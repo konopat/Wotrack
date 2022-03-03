@@ -27,6 +27,46 @@ struct K {
         static let spacing: CGFloat = 10
     }
     
+    struct Card {
+        static let shape = RoundedRectangle(cornerRadius: 10)
+        static let spacing: CGFloat = 5
+        static let spacingCaption: CGFloat = 2
+        static let aspectRatio: CGFloat = 4/5
+        static let iconRatio: CGFloat = 4
+        static let iconWidth: CGFloat = 60
+        static let iconHeight: CGFloat = 60
+        
+        struct inGallery {
+            struct Frame {
+                static let width: CGFloat = 100
+                static let height: CGFloat = 100
+            }
+            struct Icon {
+                struct Frame {
+                    static let width: CGFloat = 80
+                    static let height: CGFloat = 80
+                }
+            }
+        }
+        struct Selected {
+            struct Frame {
+                static let width: CGFloat = 150
+                static let height: CGFloat = 150
+            }
+            struct Icon {
+                struct Frame {
+                    static let width: CGFloat = 100
+                    static let height: CGFloat = 100
+                }
+            }
+        }
+    }
+    
+    struct Button {
+        static let shape = RoundedRectangle(cornerRadius: 0)
+        static let height: CGFloat = 50
+    }
+    
     struct CoreData {
         static let persistentContainerName = "Wotrack"
         static let parentEntityName = "Exercise"
@@ -44,14 +84,14 @@ struct K {
     }
     
     struct Icons {
-        struct Autors {
-            struct FlatIconWorkoutSet {
-                static let iconSetUrl = "https://www.flaticon.com/authors/ultimatearm"
-                static let iconSetText = "Icons made by Ultimatearm from www.flaticon.com"
-            }
+        struct SystemSet {
+            static let plus = "plus"
         }
         struct Default {
-            static let defaultIconSet = [
+            static let authorURL = "https://www.flaticon.com/authors/ultimatearm"
+            static let authorCitation = "Icons made by Ultimatearm from www.flaticon.com"
+            static let icon = "default"
+            static let iconSet = [
                 "squat",
                 "pullups",
                 "pushups",
@@ -86,34 +126,45 @@ struct K {
                 "workout-17",
                 "yogaBall",
             ]
-            static let icon = "default"
-            static let iconTitle = "exercise icons"
-            static let iconUrl = "https://www.flaticon.com/free-icons/exercise"
-            static let iconText = "Exercise icons created by ultimatearm - Flaticon"
         }
-        struct Squat {
-            static let icon = "squat"
-            static let iconTitle = "squat icons"
-            static let iconUrl = "https://www.flaticon.com/free-icons/squat"
-            static let iconText = "Squat icons created by ultimatearm - Flaticon"
-        }
-        struct PullUps {
-            static let icon = "pullups"
-            static let iconTitle = "pull up icons"
-            static let iconUrl = "https://www.flaticon.com/free-icons/pull-up"
-            static let iconText = "Pull up icons created by ultimatearm - Flaticon"
-        }
-        struct PushUps {
-            static let icon = "pushups"
-            static let iconTitle = "workout icons"
-            static let iconUrl = "https://www.flaticon.com/free-icons/workout"
-            static let iconText = "Workout icons created by ultimatearm - Flaticon"
-        }
-        struct SitUps {
-            static let icon = "situps"
-            static let iconTitle = "sit up icons"
-            static let iconUrl = "https://www.flaticon.com/free-icons/sit-up"
-            static let iconText = "Sit up icons created by ultimatearm - Flaticon"
-        }
+    }
+    
+    struct Text {
+        static let toDay = [
+            "Eng": "Today",
+            "Ru": "Сегодня",
+        ]
+        static let total = [
+            "Eng": "Total",
+            "Ru": "Всего",
+        ]
+        static let chooseAnIcon = [
+            "Eng": "Choose an icon",
+            "Ru": "Выберите иконку",
+        ]
+        static let nameTheExercise = [
+            "Eng": "Name the exercise",
+            "Ru": "Название упражнения",
+        ]
+        static let newExercise = [
+            "Eng": "New exercise",
+            "Ru": "Новое упражнение",
+        ]
+        static let confirm = [
+            "Eng": "Confirm",
+            "Ru": "Сохранить",
+        ]
+        static let newIterance = [
+            "Eng": "New iterance",
+            "Ru": "Новое повторение",
+        ]
+        static let add = [
+            "Eng": "Add",
+            "Ru": "Добавить",
+        ]
+        static let date = [
+            "Eng": "Date",
+            "Ru": "Дата",
+        ]
     }
 }

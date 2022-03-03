@@ -10,6 +10,8 @@ import CoreData
 
 struct StartNavigationView: View {
     
+    // The first screen includes root options for navigation
+    
     @ObservedObject var viewModel: ExercisesViewModel
 
     var body: some View {
@@ -18,7 +20,8 @@ struct StartNavigationView: View {
                 // Background
                 Color(K.Color.backgroundColor)
                     .edgesIgnoringSafeArea(.all)
-                GeometryReader { geometry in
+                // Body
+                GeometryReader { geometry in // Calculates screen sizes dynamically
                         VStack {
                             // Header
                             HStack {
@@ -30,21 +33,20 @@ struct StartNavigationView: View {
                             .padding()
                             // Content
                             ScrollView {
-                                ExerciseListView(viewModel: viewModel, geometry: geometry)
+                                ExerciseGridView(viewModel: viewModel, geometry: geometry)
                             }
                             .onAppear(perform: loadData)
                         }
                 }
-                .navigationTitle("Wotrack")
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarHidden(true)
+                .navigationTitle(K.Brand.logoTitle) // For back button title
+                .navigationBarHidden(true) // We wrote custom header above
+                .navigationBarTitleDisplayMode(.inline) // Reduces heading space
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // Fix problem with constraint warning
-        
+        .navigationViewStyle(StackNavigationViewStyle()) // Fix problem with constraint warning        
     }
     private func loadData() {
-        viewModel.loadExercises()
+        viewModel.loadData()
     }
 }
 

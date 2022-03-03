@@ -17,34 +17,43 @@ struct IteranceEditorView: View {
     let iterance: Iterance
     
     var body: some View {
-        VStack {
-            TextField("New iterance", value: $numberOfIterance, format: .number)
-                .multilineTextAlignment(.center)
-                .padding()
-                .font(.largeTitle .bold())
-                .keyboardType(.decimalPad)
-            
-            DatePicker("Date:", selection: $timestamp)
+        ZStack {
+            Color(K.Color.backgroundColor)
+                .edgesIgnoringSafeArea(.bottom)
+            VStack {
+                TextField(K.Text.newIterance[viewModel.language] ?? "New iterance", value: $numberOfIterance, format: .number)
+                    .foregroundColor(Color(K.Color.lightTextColor))
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .font(.system(size: 70) .bold())
+                    .keyboardType(.decimalPad)
                 
-            Button {
-                saveData()
-                dismiss()
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 0)
-                        .foregroundColor(Color(K.Color.backgroundColor))
-                    Text("Confirm")
-                        .bold()
-                        .foregroundColor(Color(K.Color.lightTextColor))
-                        .padding()
+                DatePicker("\(K.Text.date[viewModel.language] ?? "Date"):", selection: $timestamp)
+                    .labelsHidden()    
+                    .padding()
+                    .background(Color(K.Color.cardBackgroundColor))
+                    
+                    
+                Button {
+                    saveData()
+                    dismiss()
+                } label: {
+                    ZStack {
+                        K.Button.shape
+                            .foregroundColor(Color(K.Color.backgroundColor))
+                        Text(K.Text.confirm[viewModel.language] ?? "Confirm")
+                            .bold()
+                            .foregroundColor(Color(K.Color.lightTextColor))
+                            .padding()
+                    }
+                    .frame(height: K.Button.height)
                 }
-                .frame(height: 50)
+                Spacer()
             }
-            Spacer()
+            .padding()
+            .onAppear(perform: loadData)
+            .onDisappear(perform: saveData)
         }
-        .padding()
-        .onAppear(perform: loadData)
-        .onDisappear(perform: saveData)
     }
     
     func loadData() {
@@ -60,9 +69,3 @@ struct IteranceEditorView: View {
         viewModel.saveData()
     }
 }
-
-//struct IteranceEditorView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IteranceEditorView()
-//    }
-//}
