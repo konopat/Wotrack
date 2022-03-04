@@ -56,3 +56,9 @@ struct Icons {
 Allows you to create child lists
 
 ![App gif preview](https://github.com/konopat/Wotrack/blob/3a270d845d91d1571033ac00f567060c1450501c/CDRelationships.gif)
+
+## Switch language
+
+I use just Eng/Rus, but you can add more. The user's choice is stored in userDefaults.
+
+![App gif preview](https://github.com/konopat/Wotrack/blob/efa9cae25341108248022e9153b9acdb28315a45/switchLanguage.gif)
