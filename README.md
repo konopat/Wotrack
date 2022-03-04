@@ -62,3 +62,7 @@ Allows you to create child lists
 I use just Eng/Rus, but you can add more. The user's choice is stored in userDefaults.
 
 ![App gif preview](https://github.com/konopat/Wotrack/blob/efa9cae25341108248022e9153b9acdb28315a45/switchLanguage.gif)
+
+## First generation iPhone SE supported
+
+![First generation iPhone SE supported](https://github.com/konopat/Wotrack/blob/6be8c796087054a53887a18f6811f1ce5ce2bf43/iphoneSE.png)
