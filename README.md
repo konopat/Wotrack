@@ -1,9 +1,9 @@
 # Wotrack
 Workout tracker (SwiftUI + MVVM + CoreData + CloudKit). 
 
-![App gif preview](https://github.com/konopat/Wotrack/blob/a106b7b7f1cf028e306bded25d708accdcd429e8/preview.gif)
-
 Also used: Relationships, Multilingual, Drag and Drop reordered Grid.
+
+![App gif preview](https://github.com/konopat/Wotrack/blob/a106b7b7f1cf028e306bded25d708accdcd429e8/preview.gif)
 
 Icons made by Ultimatearm from [flaticon.com](https://www.flaticon.com/authors/ultimatearm "The best icons for free")
 
