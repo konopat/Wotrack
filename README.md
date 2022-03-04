@@ -1,5 +1,17 @@
 # Wotrack
-Workout tracker (SwiftUI + MVVM + CoreData + CloudKit). Also used: Relationships, Multilingual, Drag and Drop reordered Grid.
+Workout tracker (SwiftUI + MVVM + CoreData + CloudKit). 
+
+![App gif preview](https://github.com/konopat/Wotrack/blob/a106b7b7f1cf028e306bded25d708accdcd429e8/preview.gif)
+
+Also used: Relationships, Multilingual, Drag and Drop reordered Grid.
+
+Icons made by Ultimatearm from [flaticon.com](https://www.flaticon.com/authors/ultimatearm "The best icons for free")
+
+## CoreData + MVVM
+MVVM makes work with CoreData clearer. You will find all the logic with detailed comments in the file:
+[ViewModel/ExercisesViewModel.swift](https://github.com/konopat/Wotrack/blob/9dd84bf6a328c76a686a285f6a3a574025d1cec5/Wotrack/ViewModel/ExercisesViewModel.swift "ViewModel example")
+
+
 
 ## Drag and Drop reordered Grid
 Just use ReorderableForEach (Views/CustomViewsExtenssions/ReorderableForEach) and moveAction in LazyVGrid() to activate Drag and Drop reordered Grid:
@@ -53,7 +65,7 @@ struct Icons {
 ```
 ## Core Data relationships
 
-Allows you to create child lists
+Relationships allows you to create child lists.
 
 ![App gif preview](https://github.com/konopat/Wotrack/blob/3a270d845d91d1571033ac00f567060c1450501c/CDRelationships.gif)
 
