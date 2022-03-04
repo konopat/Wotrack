@@ -13,6 +13,7 @@ struct IteranceListView: View {
     @ObservedObject var viewModel: ExercisesViewModel
     let exercise: Exercise // Expect the exercise from the parent view
     let geometry: GeometryProxy // Expect dynamic sizes from the parent view
+    @State private var showingAlert = false
     
     var body: some View {
         ScrollView { // If you want to place something other than a List on this view.
@@ -23,19 +24,38 @@ struct IteranceListView: View {
                             .font(.largeTitle .bold())
                             .foregroundColor(Color(K.Color.lightTextColor))
                         Spacer()
-                        VStack(alignment: .trailing) {
-                            Group {
-                                Text("\(K.Text.toDay[viewModel.language] ?? "Today"): \(exercise.toDayIterances)")
-                                Text("\(K.Text.total[viewModel.language] ?? "Total"): \(exercise.sumOfIterances)")
-                            }
-                            .foregroundColor(Color(K.Color.lightTextColor))
+                        Button {
+                            showingAlert = true
+                        } label: {
+                            Image(systemName: K.Icons.SystemSet.trash)
+                                .foregroundColor(Color(K.Color.lightTextColor))
                         }
-                        .font(.caption)
+                        .alert(isPresented: $showingAlert) {
+                            Alert(
+                                title: Text(K.Text.deleteAlert[viewModel.language] ?? "Confirm deletion"),
+                                message: Text(K.Text.deleteAlertDescription[viewModel.language] ?? "Are you sure?"),
+                                primaryButton: .destructive(Text(K.Text.delete[viewModel.language] ?? "Delete")) {
+                                    delete()
+                                },
+                                secondaryButton: .cancel(Text(K.Text.cancel[viewModel.language] ?? "Cancel" ))
+                            )
+                        }
+
                     }
                 }
                 .padding()
+                
                 // Field
                 AddNewItemFieldView(viewModel: viewModel, exercise: exercise)
+                HStack() {
+                    Group {
+                        Text("\(K.Text.toDay[viewModel.language] ?? "Today"): \(exercise.toDayIterances)")
+                        Text("\(K.Text.total[viewModel.language] ?? "Total"): \(exercise.sumOfIterances)")
+                        Spacer()
+                    }
+                    .foregroundColor(Color(K.Color.lightTextColor))
+                }
+                .padding(.horizontal)
                 // Listing
                 ListOfItemsView(viewModel: viewModel, geometry: geometry, exercise: exercise)
             }
@@ -44,6 +64,10 @@ struct IteranceListView: View {
                             .edgesIgnoringSafeArea(.all)
             )
         }        
+    }
+    
+    func delete() {
+        viewModel.delete(the: exercise)
     }
 }
 

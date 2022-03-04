@@ -86,6 +86,7 @@ struct K {
     struct Icons {
         struct SystemSet {
             static let plus = "plus"
+            static let trash = "trash"
         }
         struct Default {
             static let authorURL = "https://www.flaticon.com/authors/ultimatearm"
@@ -152,7 +153,7 @@ struct K {
         ]
         static let confirm = [
             "Eng": "Confirm",
-            "Ru": "Сохранить",
+            "Ru": "Подтвердить",
         ]
         static let newIterance = [
             "Eng": "New iterance",
@@ -165,6 +166,22 @@ struct K {
         static let date = [
             "Eng": "Date",
             "Ru": "Дата",
+        ]
+        static let deleteAlert = [
+            "Eng": "Confirm deletion",
+            "Ru": "Подтвердите удаление",
+        ]
+        static let deleteAlertDescription = [
+            "Eng": "Are you sure you want to delete the exercise with all iteration history?",
+            "Ru": "Вы действительно хотите удалить упражнение со всей историей повторений?",
+        ]
+        static let cancel = [
+            "Eng": "Cancel",
+            "Ru": "Отмена",
+        ]
+        static let delete = [
+            "Eng": "Delete",
+            "Ru": "Удалить",
         ]
     }
 }

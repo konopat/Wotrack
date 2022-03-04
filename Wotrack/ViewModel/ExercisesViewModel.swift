@@ -80,6 +80,18 @@ class ExercisesViewModel: ObservableObject {
         // And start saving certainly
         saveData()
     }
+    
+    func delete(the exercise: Exercise) {
+        // Firstable remove all iterances from the exercise
+        if let iterances = exercise.iterances {
+            for iterance in iterances {
+                persistenceController.container.viewContext.delete(iterance as! NSManagedObject)
+            }
+        }
+        // Than delete the exercise
+        persistenceController.container.viewContext.delete(exercise)
+        saveData()
+    }
 
     func loadExercises() {
         
