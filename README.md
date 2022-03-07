@@ -46,7 +46,7 @@ ScrollView(.horizontal){
 ```
 ![App gif preview](https://github.com/konopat/Wotrack/blob/3a270d845d91d1571033ac00f567060c1450501c/iconSet.gif)
 
-You can change the default icon set with your own in Contants.swift file
+You can change the default icon set with your own in Constants.swift file
 
 ```
 struct Icons {
